@@ -1,159 +1,54 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Bootstrap -->
-    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="lib/style.css" rel="stylesheet" media="screen">
-
-    <!--<link href="./index_files/style.css" rel="stylesheet" media="screen">-->
-    <!--<script async="" src="./index_files/analytics.js"></script><script src="./index_files/jquery.js"></script>
-    <script src="./index_files/bootstrap.min.js"></script>
-    <script src="./index_files/handlebars.js"></script>
-    <script src="./index_files/jquery(1).js"></script>
-    <script src="./index_files/underscore.js"></script>
-    <script src="./index_files/dateformat.js"></script>-->
-
-<!--<script type="text/javascript">
-    function update_dates() {
-        var holidays = ['09/07/15', '11/02/15', '11/03/15', '11/26/15',  '11/27/15', '12/24/15'];
-        var curClass = new Date(2015,8,9,14,40,0,0);
-        var lastClass = new Date(2015,11,12,14,40,0,0);        
-        var spans = document.getElementsByClassName("date");
-        var lastClassWasBefore = true;
-        var tostr = function(dt) { return dateFormat(dt, 'dddd<br/>m/d') };
-        var toholiday = function(dt) { return dateFormat(dt, 'm/dd/yy') };
-        var nextClassFunc = (function() {
-          var gap = 5;
-          return function(dt) {
-            var newdt = new Date(dt.getTime() + (24 * 60 * 60 * gap * 1000));
-            gap = (gap === 5)? 2: 5;
-            return newdt;
-          };
-        })();
-
-        for (i = 0; i < spans.length; i++) {
-            var dayString = tostr(curClass);
-            console.log(toholiday(curClass));
-            if (_.contains(holidays, toholiday(curClass))) {
-              curClass = nextClassFunc(curClass);
-              dayString = tostr(curClass);
-            }
-
-            if (0) {
-              var holiday = false;   
-              do {
-                  holiday = false;
-                  for (j = 0; j < holidays.length; j++) {
-                      if (holidays[j] == dayString)
-                          holiday = true;
-                  }
-                  if (holiday) {
-                      curClass = new Date(curClass.getTime() + (24 * 60 * 60 * gap * 1000));
-                      if (gap == 5) { gap = 2; } else { gap = 5; }
-                      dayString = dateFormat(curClass,'m/d/yy');
-                  }
-              } while (holiday);
-            }
-            var now = new Date();
-            spans[i].innerHTML = dayString;
-            if (lastClassWasBefore && curClass.getTime() > new Date()) { // this is the next class
-                var tr = $(spans[i]).parent().parent().parent();
-                tr.addClass("current");
-                tr.before("<tr><td class='nextclass' colspan=5><div><a name='schedule'></a>Next Class!</div></td></tr>");
-                lastClassWasBefore = false;
-            }
-            curClass = nextClassFunc(curClass);
-        }
-    }
- 
-  Handlebars.registerHelper("math", function(lvalue, operator, rvalue, options) {
-      lvalue = parseFloat(lvalue);
-      rvalue = parseFloat(rvalue);
-          
-      return {
-          "+": lvalue + rvalue,
-          "-": lvalue - rvalue,
-          "*": lvalue * rvalue,
-          "/": lvalue / rvalue,
-          "%": lvalue % rvalue
-      }[operator];
-  });
-      
-</script>-->
-<!--<script id="entry-template" type="text/x-handlebars-template">
-  {{#each days}}
-  <tr > 
-    <td > <p > <span class="date"> </span> </td> 
-    <td>
-        <div >L{{math @index "+" 1}}: {{slug}} </div>
-        <div >{{{title}}} </div>
-    </td>
-    --><!--<td >
-      <p > <span >{{desc}} </span> </p>
-    </td>--><!--
-    <td style="max-width: 200px" >
-      <p > <span >{{{readings}}}</span> </p>
-    </td>
-    <td style="max-width: 200px;">
-      {{#if due}}<div><div style="width:100%" class="due text-warning bg-warning">Due</div>{{{due}}}</div><br/>{{/if}}
-      {{#if hw}}<div><div style="width:100%" class="hw text-info bg-info">Assigned</div>{{{hw}}}</div><br/>{{/if}}
-      {{#if notes}}<div class="notes">{{{notes}}} </div><br/><br/>{{/if}}
-    </td>
-  </tr>
-  {{/each}}
-</script>-->
-
-      
-<title>4111: Introduction to Databases</title>
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- Bootstrap -->
+  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link href="lib/style.css" rel="stylesheet" media="screen">
+  <title>4111: Introduction to Databases</title>
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-inner">
-          <a class="navbar-brand active" href="http://www.cs.columbia.edu/~coms4111/#">4111 Spring 2016 (Section 2)</a>
-          <div class="collapse navbar-collapse ">
-            <ul class="nav navbar-nav" role="tablist">
-              <li><a href="http://www.cs.columbia.edu/~coms4111/#staff">Staff</a></li>
-              <li><a href="http://www.cs.columbia.edu/~coms4111/#grading">Grading</a></li>
-              <li><a href="http://www.cs.columbia.edu/~coms4111/#links">Links</a></li>
-              <li><a href="http://www.cs.columbia.edu/~coms4111/#schedule">Schedule</a></li>
 
-            </ul>
-          </div><!--/.nav-collapse -->
+<body>
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-inner">
+        <a class="navbar-brand active" href="#">4111 Spring 2016 (Section 2)</a>
+        <div class="collapse navbar-collapse ">
+          <ul class="nav navbar-nav" role="tablist">
+            <li><a href="#staff">Staff</a></li>
+            <li><a href="#grading">Grading</a></li>
+            <li><a href="#links">Links</a></li>
+            <li><a href="#schedule">Schedule</a></li>
+          </ul>
         </div>
       </div>
     </div>
+  </div>
 
   <div class="container">
-
     <div class="page-header">
     <h2>Introduction to Databases</h2>
     </div>
 
-
     <div class="row">
-      <div class="col-md-2"> <b>Units: </b> </div>
-      <div class="col-md-8"><p valign="bottom">3 </p></div>
+      <div class="col-md-2"><b>Units:</b></div>
+      <div class="col-md-8"><p>3</p></div>
     </div>
-    <a id="staff" name="staff"></a>
+    
     <div class="row">
-      <div class="col-md-2"> <b>Instructor:</b> </div>
-      <div class="col-md-8"><p valign="bottom">
-        <a href="http://www.evanjones.ca/">Evan Jones</a> <a href="mailto:ej@evanjones.ca">ej@evanjones.ca</a>
-      </p></div>
+      <div class="col-md-2"><a id="staff" name="staff"></a><b>Instructor:</b></div>
+      <div class="col-md-8"><p><a href="http://www.evanjones.ca/">Evan Jones</a> <a href="mailto:ej@evanjones.ca">ej@evanjones.ca</a></p></div>
     </div>
     <div class="row">
-      <div class="col-md-2"> <b>Staff:</b> </div>
-      <div class="col-md-8"><p valign="bottom">
-        Jincheng Li   <br>
-        Yunheng Liu
-      </p></div>
+      <div class="col-md-2"><b>Staff:</b> </div>
+      <div class="col-md-8">
+        <p>Jincheng Li   <br>
+        Yunheng Liu</p>
+      </div>
     </div>
 
-
     <div class="row">
-      <div class="col-md-2"> <b>Meetings:</b> </div>
-      <div class="col-md-8"><p valign="bottom">
-        TuTh 8:40A-9:55A, 209 Havemeyer Hall
-      </p></div>
+      <div class="col-md-2"><b>Meetings:</b></div>
+      <div class="col-md-8"><p>TuTh 8:40A-9:55A, 209 Havemeyer Hall</p></div>
     </div>
 
     <div class="row">
@@ -176,9 +71,8 @@
     </div>
 
     <br>
-    <a id="grading" name="grading"></a>
     <div class="row">
-      <div class="col-md-2"><b>Grading:</b></div>
+      <div class="col-md-2"><a id="grading" name="grading"></a><b>Grading:</b></div>
       <div class="col-md-8">
         Grading will be based on exams and successful completion of homeworks and projects.
         <br><br>
@@ -197,9 +91,9 @@
 
 
     <br>
-    <a id="links" name="links"></a>
+    
     <div class="row">
-      <div class="col-md-2" style="vertical-align: top"><b>Useful Links:</b></div>
+      <div class="col-md-2" style="vertical-align: top"><a id="links" name="links"></a><b>Useful Links:</b></div>
       <div class="col-md-8">
         <!--Link to <a href="https://www.google.com/calendar/embed?showTitle=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;mode=WEEK&amp;height=400&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=columbia.edu_5552pjkf1resa92b2m80frtrmk%40group.calendar.google.com&amp;color=%238C500B&amp;ctz=America%2FNew_York">Office hours</a> google calendar (if it doesnt' load, incognito seems to help).
         <br>-->
@@ -228,8 +122,7 @@
 
 
 
-    <h3>Class Schedule </h3>
-    <a id="schedule" name="schedule"></a>
+    <h3><a id="schedule" name="schedule"></a>Class Schedule </h3>
     <table class="table table-striped">
       <thead>
           <tr>
@@ -244,8 +137,8 @@
   <tr> 
     <td> <p> <span class="date">Tuesday <br>1/19</span> </p></td> 
     <td>
-        <div>L1: Intro </div>
-        <div>Introduction and Administriva</div>
+        <div><a href="https://github.com/w4111/syllabus/raw/master/lectures/lecture_01.pdf">L1: Intro</a></div>
+        <div><a href="https://github.com/w4111/syllabus/raw/master/lectures/lecture_01.pdf">Introduction and Administriva</a></div>
     </td>
     <!--<td >
       <p > <span > </span> </p>
@@ -272,12 +165,12 @@
       <p> <span>Chapter 2</span> </p>
     </td>
     <td style="max-width: 200px;">
-      <div><div style="width:100%" class="due text-warning bg-warning">Due</div><a href="http://github.com/w4111/hw0">HW 0</a> 10AM</div><br>
+      <div><div style="width:100%" class="due text-warning bg-warning">Due</div><a href="http://github.com/w4111/hw0">HW 0</a> 8:40AM</div><br>
       <div><div style="width:100%" class="hw text-info bg-info">Assigned</div>Project 1 Part 1.  Look for teammate</div><br>
-      <div class="notes">You will be removed from class if HW0 not completed on time -- no exceptions </div><br><br>
     </td>
   </tr>
 
 </tbody>
-    </table>
+</table>
+</div>
 </body></html>
