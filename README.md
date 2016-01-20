@@ -1,5 +1,8 @@
 # W4111 Spring 2016 Syllabus (Section 002)
 
+See the schedule on the course web site: http://www.cs.columbia.edu/~coms4111/ejones.html
+
+
 Instructor
 
 * Evan Jones
@@ -16,7 +19,10 @@ Textbook
 
 *  Database Management Systems 3rd Edition by Ramakrishnan and Gehrke. 
 
-Prereqs
+(Not required but may be useful for additional detail)
+
+
+Prerequisites
 
 * COMS W3134 or W3137 (equivalent courses taken elsewhere are acceptable as well) and
 * Fluency in Python or can pick it up during the class
