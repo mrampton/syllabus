@@ -75,8 +75,8 @@ Grading Policy
 * Homework: 15% equally weighted
 * Project 1: 15% 
 * Project 2: 5% 
-* Midterm: 25% (closed book, 1/2 cheat sheet) 10/28
-* Final: 40% (closed book, 1/2 cheat sheet) Last day of class 12/9
+* Midterm 1: 25% (closed book, 1/2 cheat sheet)
+* Midterm 2: 40% (closed book, 1/2 cheat sheet)
 
 Notes on grading (please read):
 <a name="cheating"></a>
@@ -120,9 +120,9 @@ Additional late day rules
 
 Alternative procedures to submit late homework:
 
-* **(Most Preferred)** Bring to any office hours.
+* **(Preferred)** Bring to any TA's office hours.
 * Bring to class.
-* **(Least preferred)** Contact a TA by email _in advance_ to make arrangements.
+* **(Least preferred)** Submit to Eugene Wu's office: 421 Mudd in the DSI space: [map](http://eugenewu.net/images/map.png)
 
 When using late days, note that homeworks tend to get harder later in the course.
 
