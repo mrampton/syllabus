@@ -75,8 +75,8 @@ Grading Policy
 * Homework: 15% equally weighted
 * Project 1: 15% 
 * Project 2: 5% 
-* Midterm 1: 25% (closed book, 1/2 cheat sheet)
-* Midterm 2: 40% (closed book, 1/2 cheat sheet)
+* Midterm 1: 25% (closed book, 1 two-sided cheat sheet)
+* Midterm 2: 40% (closed book, 1 two-sided cheat sheet)
 
 Notes on grading (please read):
 <a name="cheating"></a>
