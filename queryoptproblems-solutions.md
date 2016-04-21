@@ -1,48 +1,24 @@
-
-
 # Intro
 
-The following are examples of problems that you may want to practice with.  I'll supply answers to a subset of the problems at a later date, so you can work out the rest.
-
-These problems are not graded.  Working with others on this is encouraged.
-
-
-Edits
-
-
-* (12/8) indexing problem didn't distinguish between directory page and leaf pages when computing number of entries/pointers per page,
-  resulted in off by one error.  End disk IOs remains the same
-* (12/5, 12/6) Single join, R index nested loops join S case: account for 1 IO for each inner tuple matched
-  taking those IOs into account, the NLJ option ends up being faster than INLJ (which was earlier incorrectly stated as fastest)
-* (12/4 12pm) clarified single join setup text.  Removed the comments that led to confusion.
-* Single join, R index nested loops join S case: accounted for the 1 disk IO cost to access each tuple in the index
-* (12/2, 5pm) b+tree secondary index, (a1 = 10) question.  Didn't consider the cardinality of the predicate.  Should be 13 instead of 4
-* (12/1, 10am) b+tree primary index, (a1 > 50).  double counted the first leaf page.  should be 52 total instead of 53.
-* secondary index (a1 > 50).  added the pages wrong.  should be 552 instead of 554
-* (11/30 12pm) fanout for the main indexing problem was wrong.  (was 444, should be 54).  This has been fixed
-* the last indexing subproblem has been fleshed out to take cardinality into account.
-  * added cost to read the leaf pages
-* part 4 of the last question in the simple operator case (a1 > 50, secondary index).  Neglected to account
-  for pointer following cost.
+These are examples of problems that you may want to practice with. These problems are not graded.  Working with others on this is encouraged.
 
 
 
 # Indexing Problems
 
-Let's say we have 10,000 records and we create a secondary B+ tree index on the age attribute.  A pointer is 8 bytes, the age takes 4 bytes, a page has size 1k bytes, we enforce a fill factor of 2/3, and ignoring other storage overheads, how many leaf nodes are in the tree?
+Let's say we have 10,000 records and we create a secondary B+ tree index on the age attribute.  A pointer is 8 bytes, the age takes 4 bytes, a page has size 1000 bytes, we enforce a fill factor of 2/3, and ignoring other storage overheads, how many leaf nodes are in the tree?
 
         age takes 4 bytes, pointer is 8 bytes-
         A fill factor of 2/3 gives us only 666 bytes that can store data
         
-        For directory entries we expect
+        For directory pages we require N keys and N+1 pointers:
           
           N*(key size + pointer size) + pointer size < page size
           N(4 + 8) + 8 = 1000 
 
         Solving for N gives us 54 (key, pointer) pairs per directory page and a fanout of 55
 
-        
-        for leaf pages, we expect 666 / (4 + 8) = 55 entries per page
+        For leaf pages, we expect 666 / (4 + 8) = 55 entries per page
 
         With 10,000 records, we expect 10,000 / 55 = 181.8 = 182 (rounded up) data pages (leaf nodes) in the tree
 
@@ -50,11 +26,10 @@ Let's say we have 10,000 records and we create a secondary B+ tree index on the 
 
           log_55 (182) = 1.29 = 2 (rounded up)
 
-        So we need a root node, its' children, then the leaft nodes.  
+        So we need a root node, its' children, then the leaf nodes.  
         Accessing any tuple needs to read the root node, its child, and the correct leaf node, then 
         follow the pointer to the actual heap page containing the tuple.  
         That's 4 disk IOs.
-
 
 
 Let's say my main memory has the following number of pages.  What is the expected number of disk accesses to access a given record?
@@ -66,21 +41,22 @@ Let's say my main memory has the following number of pages.  What is the expecte
 
 * 100
 
-        The root node and its children take up 55 pages in the cache and can be cached.  That saves 2 IO.
-        186/45 ~= 25% of the leaf nodes can be cached, so that saves us .25 IO.
-        The cost is then 4 - 2 - 0.25 = 1.75 IOs  (2 IOs is fine)
+        The root node and its children take up 1+55 pages in the cache and can be cached.  That saves 2 IO,
+        for a total of 2 IOs (valid answer). It is also possible some fraction of the leaf nodes can be cached:
+        186 leaf pages divided by 44 remaining pages in memory ~= 25% of the leaf nodes can be cached, so that saves us .25 IO.
+        The cost is then 4 - 2 - 0.25 = 1.75 IOs.
 
 * 1000
 
-        All index pages can be cached in memory.
+        All index pages can be cached in memory (1 root + 55 children + 182 leaf pages)
         Assuming the memory allocated to the index is not used for anything else, 
-        it takes 1 IO to access heap page.
+        it takes 1 IO to access the heap page containing the tuple. (Arguably, some of the
+        remaining 762 pages could be used to cache the heap file, but we weren't given enough
+        information to make an estimate about it).
 
 
 
 Let's say age has 80 distinct values, and no index pages are cached in memory.  How many disk IOs (one per page) would I expect for a predicate of the form `age = CONSTANT`?
-
-
 
         there are 10,000 records, 80 distinct values, so we expect 125 tuples to match the predicate.
         Each tuple is a potentially a separate IO to a different heap page.
