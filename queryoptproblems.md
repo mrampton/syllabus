@@ -12,10 +12,9 @@ NOTE: I manually split this into just the problems, and the [solutions in a sepa
 1. Let's say we have 10,000 records and we create a secondary B+ tree index on the age attribute.  A pointer is 8 bytes, the age takes 4 bytes, a page has size 1000 bytes, we enforce a fill factor of 2/3, and ignoring other storage overheads, how many leaf nodes are in the tree? What is the height of the tree? How many disk accesses does it take to read a tuple matching a given key (equality search?)
 
 1. Let's say my main memory has the following number of pages.  What is the expected number of disk accesses to access a given record?
-
-    a. * 10
-    b. * 100
-    c. * 1000
+    1. * 10
+    1. * 100
+    1. * 1000
 
 1. Let's say age has 80 distinct values, and no index pages are cached in memory.  How many disk IOs (one per page) would I expect for a predicate of the form `age = CONSTANT`?
 
