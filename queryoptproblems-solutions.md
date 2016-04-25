@@ -118,7 +118,7 @@ Again, assuming no indexes, what is the estimated number of tuples where
         We can combine our guesses for a1 and a2:
         1000 * 1/100 * 0.1 = 1
 
-Now, assuming we have a b+tree primary index on a1 with fanout 10 (question didn't originally specify fanout), what is the cost in number of pages to
+Now, assuming we have a b+tree primary index on a1 with fanout 10, what is the cost in number of pages to
 
 1. Read all records in R?
 
@@ -184,7 +184,7 @@ Where
         NPAGES(S) = 10
         Primary B+Tree on R.bid
         Secondary B+Tree on S.sid  
-        Fanout = 10 (previously not in question, sorry!)
+        Fanout = 10
 
 
 What is the cost, in number of pages read, for executing the following joins, where the left relation is the outer, and the right relation is the inner?
@@ -202,7 +202,13 @@ What is the cost, in number of pages read, for executing the following joins, wh
         100 to read outer
         1000 tuples in outer
         12 for index: index is height 1, so 2 IOs to leaf node + 1 to follow pointer * 10 tuples
-          (matching tuples assumed to fit into one leaf page)
+          (matching tuples assumed to fit into one leaf page. This is a reasonable assumption:
+            a. if fanout is 10, then each directory page contains 10 pointers and 9 search keys, 
+               so it seems reasonable that a leaf page might be able to fit 10 pointers and keys
+            b. the heap file itself has NCARD(S)/NPAGES(S) = 10 tuples per page, so the secondary
+               index can probably hold this many as well
+            this question should probably be more precise about the details of this index, but
+            it is useful to know what information you need, and how you might estimate it)
         100 + 1000 * 12 = 12100
 
 1. S index nested loops join R
