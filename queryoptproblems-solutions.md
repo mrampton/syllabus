@@ -8,13 +8,14 @@ These are examples of problems that you may want to practice with. These problem
 
 Let's say we have 10,000 records and we create a secondary B+ tree index on the age attribute.  A pointer is 8 bytes, the age takes 4 bytes, a page has size 1000 bytes, we enforce a fill factor of 2/3, and ignoring other storage overheads, how many leaf nodes are in the tree?
 
-        age takes 4 bytes, pointer is 8 bytes-
         A fill factor of 2/3 gives us only 666 bytes that can store data
         
-        For directory pages we require N keys and N+1 pointers:
+        For directory pages we require N keys and N+1 pointers. On average, the
+        directory pages will be 2/3rds full due to the fill factor. Calculate
+        branching factor:
           
-          N*(key size + pointer size) + pointer size < page size
-          N(4 + 8) + 8 = 1000 
+          N×(key size + pointer size) + pointer size <= (page size)×(fill factor)
+          N(4 + 8) + 8 <= 666
 
         Solving for N gives us 54 (key, pointer) pairs per directory page and a fanout of 55
 
