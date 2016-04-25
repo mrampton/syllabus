@@ -104,14 +104,17 @@ Again, assuming no indexes, what is the estimated number of tuples where
 
 1. a1 = 10
 
+        We can guess the selectivity of a1 from the index cardinality:
         1000 * 1/100 = 10
 
 1. a2 = 10
 
+        We have to guess using the default selectivity
         1000 * 0.1 = 100
 
 1. a1 = 10 AND a2 = 10
 
+        We can combine our guesses for a1 and a2:
         1000 * 1/100 * 0.1 = 1
 
 Now, assuming we have a b+tree primary index on a1 with fanout 10 (question didn't originally specify fanout), what is the cost in number of pages to

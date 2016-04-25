@@ -12,9 +12,9 @@ NOTE: I manually split this into just the problems, and the [solutions in a sepa
 1. Let's say we have 10,000 records and we create a secondary B+ tree index on the age attribute.  A pointer is 8 bytes, the age takes 4 bytes, a page has size 1000 bytes, we enforce a fill factor of 2/3, and ignoring other storage overheads, how many leaf nodes are in the tree? What is the height of the tree? How many disk accesses does it take to read a tuple matching a given key (equality search?)
 
 1. Let's say my main memory has the following number of pages.  What is the expected number of disk accesses to access a given record?
-    1. * 10
-    1. * 100
-    1. * 1000
+    1. 10
+    1. 100
+    1. 1000
 
 1. Let's say age has 80 distinct values, and no index pages are cached in memory.  How many disk IOs (one per page) would I expect for a predicate of the form `age = CONSTANT`?
 
@@ -26,8 +26,8 @@ NOTE: I manually split this into just the problems, and the [solutions in a sepa
 
 Let's say we have the following statistics about the database with table R
 
-        NCARD(R) = 1000
-        ICARD(R) = 100
+        total tuples NCARD(R) = 1000
+        unique index values ICARD(R) for attribute a1 = 100
         # pages  = 100
         minmax(a1) = [0, 100]
         default selectivity = 0.1
@@ -50,7 +50,7 @@ Again, assuming no indexes, what is the estimated number of tuples where
 
 1. a1 = 10 AND a2 = 10
 
-Now, assuming we have a b+tree primary index on a1 with fanout 10 (question didn't originally specify fanout), what is the cost in number of pages to
+Now, assuming we have a b+tree primary index on a1 with fanout 10, what is the cost in number of pages to
 
 1. Read all records in R?
         
@@ -81,15 +81,15 @@ Let's say you have the following query
 
 Where
 
-        NCARD(R) = 1000
-        NCARD(S) = 100
-        ICARD(R.bid) = 1000
-        ICARD(S.sid) = 10
-        NPAGES(R) = 100
-        NPAGES(S) = 10
+        total tuples R NCARD(R) = 1000
+        total tuples S NCARD(S) = 100
+        number unique values for R.bid ICARD(R.bid) = 1000
+        number unique values for S.bid ICARD(S.sid) = 10
+        total pages in R NPAGES(R) = 100
+        total pages in S NPAGES(S) = 10
         Primary B+Tree on R.bid
         Secondary B+Tree on S.sid  
-        Fanout = 10 (previously not in question, sorry!)
+        Fanout = 10
 
 
 What is the cost, in number of pages read, for executing the following joins, where the left relation is the outer, and the right relation is the inner?
