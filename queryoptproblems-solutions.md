@@ -44,7 +44,7 @@ Let's say my main memory has the following number of pages.  What is the expecte
 
         The root node and its children take up 1+55 pages in the cache and can be cached.  That saves 2 IO,
         for a total of 2 IOs (valid answer). It is also possible some fraction of the leaf nodes can be cached:
-        186 leaf pages divided by 44 remaining pages in memory ~= 25% of the leaf nodes can be cached, so that saves us .25 IO.
+        44 remaining pages in memory divided by 182 total leaf pages ~= 25% of the leaf nodes can be cached, so that saves us .25 IO.
         The cost is then 4 - 2 - 0.25 = 1.75 IOs.
 
 * 1000
@@ -256,6 +256,15 @@ _read from disk_ for the following?
           1 to follow pointer * 10 tuples  for index: 
           100 + 1000 * 10 = 10100
 
+        NOTE: The problem is that the index itself takes up the 11 pages: 1 for the
+        root, 10 for the leaf pages, where each leaf page contains 10 search key, pointer
+        pairs. Hence, the index lookup is free, but after you do the index lookup, you have
+        10 pointers to random values in heap file that you need to read.
+
+        This is pretty inefficient for these values. This is illustrating that using
+        indexes is not always a win!
+
+
 1. S index nested loops join R
 
         10 to read outer
@@ -263,6 +272,7 @@ _read from disk_ for the following?
         1 for index: first two levels can be cached
                     (we assume they are cached in memory already)
         10 + 100 * 1 = 110
+
 
 
 1. R merge sort join S
