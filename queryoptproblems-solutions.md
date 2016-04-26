@@ -372,7 +372,7 @@ Suppose we have no other information, and we have not built any indices, and we 
 
         100 * 1000 * 10 * 0.001 * 0.001 = 1
 
-1. What is the minimum cost plan?
+1. Suggest a minimum cost plan if the only join that can be used is a nested loops join
 
         ((T join R) join S)
 

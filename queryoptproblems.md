@@ -177,17 +177,5 @@ And I have the following statistics about the relatons
         10 tuples per page  (originally not specified)
 
 1. compute the selectivity of the query
-
-        1 / max(100, 1000) = 0.001: R.sid = S.sid
-        1 / max(1000, 10)  = 0.001: S.sid = T.sid
-        0.001 * 0.001 = .000001
-
 1. estimate the cardinality of the query result 
-
-        100 * 1000 * 10 * 0.001 * 0.001 = 1
-
-1. Suggest a the minimum cost plan
-
-        ((T join R) join S)
-
-        Recall NLJ is M + (M*N), so you want the M to be as small as possible.
+1. Suggest a minimum cost plan if the only join that can be used is a nested loops join
