@@ -6,7 +6,7 @@ These are examples of problems that you may want to practice with. These problem
 
 # Indexing Problems
 
-Let's say we have 10,000 records and we create a secondary B+ tree index on the age attribute.  A pointer is 8 bytes, the age takes 4 bytes, a page has size 1000 bytes, we enforce a fill factor of 2/3, and ignoring other storage overheads, how many leaf nodes are in the tree?
+Let's say we have 10,000 records and we create a secondary B+ tree index on the age attribute.  A pointer is 8 bytes, the age takes 4 bytes, a page has size 1000 bytes, we enforce a fill factor of 2/3, and ignoring other storage overheads, how many leaf nodes are in the tree? How many disk accesses does it take to read *one single tuple* matching a given key (equality search on age)?
 
         A fill factor of 2/3 gives us only 666 bytes that can store data
         
@@ -63,7 +63,8 @@ Let's say age has 80 distinct values, and no index pages are cached in memory.  
         Each tuple is a potentially a separate IO to a different heap page.
 
         the height is 2, the height is the _path length_ from root node to data node
-        We need to read 3 total leaf pages (186 leaf pages / 80 = 3)
+        We need to read 3 total leaf pages (182 leaf pages / 80 distinct values = 2.275 rounded up to 3;
+            or 125 tuples/55 tuples per page = 2.27 rounded up to 3)
         So 2 IO to read the root and root's child, 3 for the data (leaf) pages, and 1 IO for each matching tuple.
 
         2 + 3 + 125 = 130 IOs
