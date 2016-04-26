@@ -372,8 +372,10 @@ Suppose we have no other information, and we have not built any indices, and we 
 
         100 * 1000 * 10 * 0.001 * 0.001 = 1
 
-1. Suggest a minimum cost plan if the only join that can be used is a nested loops join
+1. Suggest a minimum cost plan (recall: the only join that can be used is a nested loops join)
 
         ((T join R) join S)
 
         Recall NLJ is M + (M*N), so you want the M to be as small as possible.
+
+        ((T join S) join R) produces the same result
