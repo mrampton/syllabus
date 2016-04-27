@@ -37,22 +37,24 @@ Let's say my main memory has the following number of pages.  What is the expecte
 
 * 10
 
-        the root node is cached in memory, and a negligable fraction of the root's children are cached.
-        So we can save one disk IO for the root being cached.  We expect 3 IOs.
+        The root node is cached in memory (1 page). The tree needs approximately 182/55 = 3.3
+        rounded to 4 next level directory pages, each with approximately 55 pointers to reference
+        the leaf pages. Therefore, we can cache the directory nodes, so we expect 1 IO to read
+        the leaf page and one to read the tuple: 4 - 2 = 2 IOs.
 
 * 100
 
-        The root node and its children take up 1+55 pages in the cache and can be cached.  That saves 2 IO,
-        for a total of 2 IOs (valid answer). It is also possible some fraction of the leaf nodes can be cached:
-        44 remaining pages in memory divided by 182 total leaf pages ~= 25% of the leaf nodes can be cached, so that saves us .25 IO.
-        The cost is then 4 - 2 - 0.25 = 1.75 IOs.
+        The root node and its children take up 1+4=5 pages in the cache. We can cache some
+        fraction of the leaf nodes: 95 remaining pages in memory divided by 182 total leaf pages ~= 52%
+        of the leaf nodes can be cached, so that saves us .5 IO.
+        The cost is then 4 - 2 - 0.5 = 1.5 IOs.
 
 * 1000
 
-        All index pages can be cached in memory (1 root + 55 children + 182 leaf pages)
+        All index pages can be cached in memory (1 root + 4 children + 182 leaf pages)
         Assuming the memory allocated to the index is not used for anything else, 
         it takes 1 IO to access the heap page containing the tuple. (Arguably, some of the
-        remaining 762 pages could be used to cache the heap file, but we weren't given enough
+        remaining pages could be used to cache the heap file, but we weren't given enough
         information to make an estimate about it).
 
 
